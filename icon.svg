@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="96" fill="#111827"/>
+<path d="M256 72l145 55v108c0 98-61 166-145 205-84-39-145-107-145-205V127z" fill="#2563eb"/>
+<text x="256" y="274" text-anchor="middle" font-family="Arial,sans-serif" font-size="104" font-weight="700" fill="white">A↔Z</text>
+<text x="256" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="white">701</text>
+</svg>
