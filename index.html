@@ -7,7 +7,7 @@
 <meta name="description" content="Offline CompTIA Security+ SY0-701 acronym practice simulator with weak-area tracking.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="styles.css?build=3">
+<link rel="stylesheet" href="styles.css?build=4">
 <title>Security+ SY0-701 Acronym Simulator</title>
 </head>
 <body>
@@ -15,21 +15,29 @@
 <script>
 (function(){
   const root=document.getElementById('app');
-  const status=()=>document.getElementById('boot-status');
+  const bootStatus=()=>document.getElementById('boot-status');
   function showError(msg){root.innerHTML='<main><h1>Security+ SY0-701 Acronym Simulator</h1><p class="dangertext"><strong>Startup error</strong></p><p>'+String(msg).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</p><p class="small">Tell ChatGPT this exact message and it can fix the next step.</p></main>'}
   window.addEventListener('error',e=>showError(e.message||('JavaScript error in '+(e.filename||'unknown file'))));
   window.addEventListener('unhandledrejection',e=>showError(e.reason?.message||e.reason||'Unhandled startup error'));
-  function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src+'?build=3';s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+src));document.body.appendChild(s)})}
+  function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src+'?build=4';s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+src));document.body.appendChild(s)})}
+  async function loadAppScoped(){
+    const r=await fetch('app.js?build=4',{cache:'no-store'});
+    if(!r.ok)throw new Error('Failed to load app.js: HTTP '+r.status);
+    const code=await r.text();
+    const s=document.createElement('script');
+    s.textContent='(function(){\n'+code+'\n})();';
+    document.body.appendChild(s);
+  }
   (async()=>{
     try{
-      if(status())status().textContent='Clearing old cached version…';
+      if(bootStatus())bootStatus().textContent='Clearing old cached version…';
       if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()))}
       if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.includes('securityplus701-acronyms')).map(k=>caches.delete(k)))}
-      if(status())status().textContent='Loading acronym bank…';
+      if(bootStatus())bootStatus().textContent='Loading acronym bank…';
       await loadScript('data.js');
       if(typeof window.loadAcronymData!=='function')throw new Error('data.js loaded, but loadAcronymData() was not created.');
-      if(status())status().textContent='Loading simulator application…';
-      await loadScript('app.js');
+      if(bootStatus())bootStatus().textContent='Loading simulator application…';
+      await loadAppScoped();
       setTimeout(()=>{if(document.getElementById('boot-status'))showError('app.js loaded but the simulator did not initialize within 5 seconds.')},5000);
     }catch(e){showError(e.message||e)}
   })();
