@@ -1,8 +1,8 @@
-const CACHE='securityplus701-acronyms-v4';
+const CACHE='securityplus701-acronyms-v5';
 const ASSETS=[
-  './','./index.html','./styles.css?build=8',
-  './payload-data-1.js?build=8','./payload-data-2.js?build=8','./payload-data-3.js?build=8','./data-v8.js?build=8',
-  './payload-app-1.js?build=8','./payload-app-2.js?build=8','./payload-app-3.js?build=8','./app-v8.js?build=8',
+  './','./index.html','./styles.css?build=9',
+  './payload-data-1.js?build=9','./payload-data-2.js?build=9','./payload-data-3.js?build=9','./data-v8.js?build=9',
+  './payload-app9-1.js?build=9','./payload-app9-2.js?build=9','./payload-app9-3.js?build=9','./app-v9.js?build=9',
   './manifest.webmanifest','./icon.svg'
 ];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
