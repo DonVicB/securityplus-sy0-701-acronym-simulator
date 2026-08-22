@@ -2,22 +2,17 @@
 
 Standalone offline-capable PWA for practicing the acronym vocabulary listed in the CompTIA Security+ SY0-701 exam objectives.
 
-## Build 9 design
-- Separate project that reuses the proven structure and tablet layout of the Security+ exam simulator.
+## Build 10 design
 - Dropdown-only questions with five closely related Security+ choices.
-- Two question styles mixed through normal tests:
-  - approximately 67% Acronym -> Full Name
-  - approximately 33% Scenario -> Acronym
-- Acronym -> Function/Purpose questions were removed because the answer format was not producing consistently strong questions.
-- Generic scenario boilerplate was removed. Scenario questions are only generated when the simulator has a meaningful clue for that acronym; it does not manufacture a generic filler scenario.
-- Coverage tracking prioritises less-practised acronym/mode combinations. With 334 acronym meanings and two active formats, the active study space is roughly 668 variants.
-- Avoids repeating the same acronym twice in a normal test where the selected pool allows it.
-- Handles acronyms with multiple meanings by adding enough context to keep questions unambiguous.
+- Scenario-heavy mix: approximately **15% Acronym -> Full Name** and **85% Scenario -> Acronym**.
+- Two-way coverage tracking prioritises acronym/mode combinations that have been seen less often over repeated tests.
+- All 334 acronym meanings have a distinct, concrete real-world example rather than a generic category template.
+- Scenario questions reuse term-specific operational situations without revealing the answer, making the scenario mode more practical and less definition-like.
 - 25, 50, 100, full-list, domain-focused, and weak-area tests.
 - Challenging distractors prioritised from the same topic/domain and similar terminology.
 - Detailed answer review after submission, paged five questions at a time for tablet stability.
-- Review shows the learner's answer, correct answer, why a wrong answer was wrong, and a practical real-world example of where the acronym or technology is used.
-- Persistent local statistics for domains, topic areas, individual acronyms, and active two-way variant coverage.
+- Review shows the learner's answer, correct answer, why a wrong answer was wrong, and a specific real-world example of where the acronym or technology appears in practice.
+- Persistent local statistics for domains, topic areas, individual acronyms, and two-way variant coverage.
 - Weak-area practice mode.
 - Offline PWA support for Android/tablet use.
 
