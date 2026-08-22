@@ -7,43 +7,26 @@
 <meta name="description" content="Offline CompTIA Security+ SY0-701 acronym practice simulator with weak-area tracking.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="styles.css?build=5">
+<link rel="stylesheet" href="styles.css?build=6">
 <title>Security+ SY0-701 Acronym Simulator</title>
 </head>
 <body>
-<div id="app" class="app"><main><h1>Security+ SY0-701 Acronym Simulator</h1><p id="boot-status">Loading acronym simulator…</p></main></div>
+<div id="app" class="app"><main><h1>Security+ SY0-701 Acronym Simulator</h1><p id="boot-status">Loading acronym challenge…</p></main></div>
 <script>
 (function(){
-  const root=document.getElementById('app');
-  function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
-  function showError(msg){
-    root.innerHTML='<main><h1>Security+ SY0-701 Acronym Simulator</h1><p class="dangertext"><strong>Startup error</strong></p><p>'+esc(msg)+'</p><p class="small">Tell ChatGPT this exact message.</p></main>';
-  }
-  window.__acronymShowError=showError;
-  window.addEventListener('error',e=>showError(e.message||'JavaScript startup error'));
-  window.addEventListener('unhandledrejection',e=>showError(e.reason?.message||e.reason||'Unhandled startup error'));
-  (async()=>{
-    try{
-      if('serviceWorker' in navigator){
-        const regs=await navigator.serviceWorker.getRegistrations();
-        await Promise.all(regs.map(r=>r.unregister()));
-      }
-      if('caches' in window){
-        const keys=await caches.keys();
-        await Promise.all(keys.filter(k=>k.includes('securityplus701-acronyms')).map(k=>caches.delete(k)));
-      }
-    }catch(e){}
-  })();
+ const root=document.getElementById('app');
+ function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+ function showError(msg){root.innerHTML='<main><h1>Security+ SY0-701 Acronym Simulator</h1><p class="dangertext"><strong>Startup error</strong></p><p>'+esc(msg)+'</p></main>'}
+ window.__acronymShowError=showError;
+ window.addEventListener('error',e=>showError(e.message||'JavaScript startup error'));
+ window.addEventListener('unhandledrejection',e=>showError(e.reason?.message||e.reason||'Unhandled startup error'));
+ (async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()))}if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.includes('securityplus701-acronyms')).map(k=>caches.delete(k)))}}catch(e){}})();
 })();
 </script>
-<script src="data.js?build=5"></script>
-<script type="module" src="app.js?build=5"></script>
+<script src="data.js?build=6"></script>
+<script type="module" src="app.js?build=6"></script>
 <script>
-setTimeout(()=>{
-  if(document.getElementById('boot-status') && window.__acronymShowError){
-    window.__acronymShowError('The simulator files loaded, but the application did not initialize within 8 seconds.');
-  }
-},8000);
+setTimeout(()=>{if(document.getElementById('boot-status')&&window.__acronymShowError)window.__acronymShowError('The simulator files loaded, but the application did not initialize within 8 seconds.')},8000);
 </script>
 </body>
 </html>
