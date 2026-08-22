@@ -1,8 +1,8 @@
-const CACHE='securityplus701-acronyms-v6';
+const CACHE='securityplus701-acronyms-v6-1';
 const ASSETS=[
-  './','./index.html','./styles.css?build=10',
-  './payload-data-1.js?build=10','./payload-data-2.js?build=10','./payload-data-3.js?build=10','./data-v8.js?build=10',
-  './payload-app10-1.js?build=10','./payload-app10-2.js?build=10','./payload-app10-3.js?build=10','./payload-app10-4.js?build=10','./payload-app10-5.js?build=10','./payload-app10-6.js?build=10','./payload-app10-7.js?build=10','./app-v10.js?build=10',
+  './','./index.html','./styles.css?build=10.1',
+  './payload-data-1.js?build=10.1','./payload-data-2.js?build=10.1','./payload-data-3.js?build=10.1','./data-v8.js?build=10.1',
+  './payload-app10-1.js?build=10.1','./payload-app10-2.js?build=10.1','./payload-app10-3.js?build=10.1','./payload-app10-4.js?build=10.1','./payload-app10-5.js?build=10.1','./payload-app10-6.js?build=10.1','./payload-app10-7.js?build=10.1','./app-v10.js?build=10.1',
   './manifest.webmanifest','./icon.svg'
 ];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
