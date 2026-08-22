@@ -4,45 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111827">
-<meta name="description" content="Offline CompTIA Security+ SY0-701 acronym practice simulator with weak-area tracking.">
+<meta name="description" content="Offline CompTIA Security+ SY0-701 acronym practice simulator with three-way question coverage and weak-area tracking.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="styles.css?build=7">
+<link rel="stylesheet" href="styles.css?build=8">
 <title>Security+ SY0-701 Acronym Simulator</title>
 </head>
 <body>
 <div id="app" class="app"><main><h1>Security+ SY0-701 Acronym Simulator</h1><p id="boot-status">Loading acronym challenge…</p></main></div>
 <script>
 (()=>{
- const root=document.getElementById('app');
- let booting=true;
- const html=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
- const observer=new MutationObserver(()=>{if(!document.getElementById('boot-status'))booting=false});
- observer.observe(root,{childList:true,subtree:true});
- function detail(e){
-   const source=e.filename?`${e.filename.split('/').pop()}:${e.lineno||'?'}:${e.colno||'?'}`:'browser/unknown source';
-   const stack=e.error?.stack?String(e.error.stack).split('\n').slice(0,4).join(' | '):'';
-   return `${e.message||'JavaScript error'} — Source: ${source}${stack?` — ${stack}`:''}`;
- }
- function report(e){
-   const msg=detail(e);
-   if(booting){
-     root.innerHTML=`<main><h1>Security+ SY0-701 Acronym Simulator</h1><p class="dangertext"><strong>Startup error</strong></p><p>${html(msg)}</p></main>`;
-     return;
-   }
-   let banner=document.getElementById('runtime-error-banner');
-   if(!banner){banner=document.createElement('div');banner.id='runtime-error-banner';banner.style.cssText='position:sticky;top:0;z-index:9999;margin:0;padding:12px 18px;background:#fff4f4;border-bottom:2px solid #b42318;color:#7a271a;font:600 14px/1.4 system-ui';document.body.prepend(banner)}
-   banner.innerHTML=`<strong>Runtime warning:</strong> ${html(msg)}`;
-   console.error(e.error||e.message);
- }
- window.addEventListener('error',report);
- window.addEventListener('unhandledrejection',e=>report({message:e.reason?.message||String(e.reason||'Unhandled promise rejection'),filename:'',lineno:0,colno:0,error:e.reason}));
- (async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()))}if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.includes('securityplus701-acronyms')).map(k=>caches.delete(k)))}}catch(e){}})();
+  const root=document.getElementById('app');
+  let booting=true;
+  const html=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  new MutationObserver(()=>{if(!document.getElementById('boot-status'))booting=false}).observe(root,{childList:true,subtree:true});
+  function describe(e){
+    const source=e.filename?`${e.filename.split('/').pop()}:${e.lineno||'?'}:${e.colno||'?'}`:'browser/unknown source';
+    const stack=e.error?.stack?String(e.error.stack).split('\n').slice(0,4).join(' | '):'';
+    return `${e.message||'JavaScript error'} — Source: ${source}${stack?` — ${stack}`:''}`;
+  }
+  function report(e){
+    const msg=describe(e);
+    if(booting){root.innerHTML=`<main><h1>Security+ SY0-701 Acronym Simulator</h1><p class="dangertext"><strong>Startup error</strong></p><p>${html(msg)}</p></main>`;return}
+    let banner=document.getElementById('runtime-error-banner');
+    if(!banner){banner=document.createElement('div');banner.id='runtime-error-banner';banner.style.cssText='position:sticky;top:0;z-index:9999;margin:0;padding:12px 18px;background:#fff4f4;border-bottom:2px solid #b42318;color:#7a271a;font:600 14px/1.4 system-ui';document.body.prepend(banner)}
+    banner.innerHTML=`<strong>Runtime warning:</strong> ${html(msg)}`;
+    console.error(e.error||e.message);
+  }
+  window.addEventListener('error',report);
+  window.addEventListener('unhandledrejection',e=>report({message:e.reason?.message||String(e.reason||'Unhandled promise rejection'),filename:'',lineno:0,colno:0,error:e.reason}));
 })();
 </script>
-<script src="data.js?build=7"></script>
-<script type="module" src="app.js?build=7"></script>
-<script src="review-pager.js?build=7" defer></script>
+<script src="payload-data-1.js?build=8"></script>
+<script src="payload-data-2.js?build=8"></script>
+<script src="payload-data-3.js?build=8"></script>
+<script src="data-v8.js?build=8"></script>
+<script src="payload-app-1.js?build=8"></script>
+<script src="payload-app-2.js?build=8"></script>
+<script src="payload-app-3.js?build=8"></script>
+<script type="module" src="app-v8.js?build=8"></script>
 <script>
 setTimeout(()=>{if(document.getElementById('boot-status'))window.dispatchEvent(new ErrorEvent('error',{message:'The simulator files loaded, but the application did not initialize within 8 seconds.',filename:'index.html',lineno:1,colno:1}))},8000);
 </script>
